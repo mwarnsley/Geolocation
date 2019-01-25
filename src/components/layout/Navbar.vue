@@ -2,10 +2,10 @@
     <nav class="nav-extended">
         <div class="nav-wrapper deep-purple darken-1">
             <div class="container">
-                <a href="" class="brand-logo left">Geolocation</a>
+                <router-link class="brand-logo left" tag="a" to="/">Geolocation</router-link>
                 <ul class="right">
-                    <li><a href="">Signup</a></li>
-                    <li><a href="">Login</a></li>
+                    <li><router-link class="active" tag="a" to="/signup">Signup</router-link></li>
+                    <li><router-link class="active" tag="a" to="/login">Login</router-link></li>
                 </ul>
             </div>
         </div>
