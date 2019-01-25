@@ -19,6 +19,7 @@
                 <button class="btn deep-purple">Signup</button>
             </div>
         </form>
+        <Spinner v-if="loading"/>
     </div>
 </template>
 
@@ -36,24 +37,30 @@
 </style>
 
 <script>
+    import Spinner from '@/components/shared/Spinner';
     import slugify from 'slugify';
     import db from '@/firebase/init';
     import firebase from 'firebase';
 
     export default {
         name: 'Signup',
+        components: {
+            Spinner
+        },
         data() {
             return {
                 email: null,
                 password: null,
                 alias: null,
                 feedback: null,
-                slug: null
+                slug: null,
+                loading: false,
             };
         },
         methods: {
             signup() {
                 if (this.alias && this.email && this.password) {
+                    this.loading = true;
                     // We are going to slugify the password to send to the database
                     this.slug = slugify(this.alias, {
                         replacement: '-',
@@ -64,11 +71,26 @@
                     const ref = db.collection('users').doc(this.slug);
                     ref.get().then(doc => {
                         if (doc.exists) {
+                            this.loading = false;
                             this.feedback = 'This alias already exists';
                         } else {
                             // Creating the user if they don't already exists
                             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+                            .then(cred => {
+                                ref.set({
+                                    alias: this.alias,
+                                    geolocation: null,
+                                    user_id: cred.user.uid
+                                });
+                            })
+                            .then(() => {
+                                this.loading = false;
+                                this.$router.push({
+                                    name: 'GMap'
+                                })
+                            })
                             .catch(err => {
+                                this.loading = false;
                                 this.feedback = err.message;
                             });
                         }
