@@ -25,6 +25,25 @@
                     minZoom: 3,
                     streetViewControl: false
                 });
+                db.collection('users').get()
+                .then(users => {
+                    users.docs.forEach(doc => {
+                        const data = doc.data();
+                        if (data.geolocation) {
+                            const marker = new google.maps.Marker({
+                                position: {
+                                    lat: data.geolocation.lat,
+                                    lng: data.geolocation.lng
+                                },
+                                map
+                            });
+                            // Add the click event to the marker
+                            marker.addListener('click', () => {
+                                this.$router.push({ name: 'ViewProfile', params: { id: doc.id } });
+                            });
+                        }
+                    });
+                });
             }
         },
         mounted() {
