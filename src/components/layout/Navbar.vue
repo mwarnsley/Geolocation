@@ -4,8 +4,9 @@
             <div class="container">
                 <router-link class="brand-logo left" tag="a" to="/">Geolocation</router-link>
                 <ul class="right">
-                    <li><router-link class="active" tag="a" to="/signup">Signup</router-link></li>
-                    <li><router-link class="active" tag="a" to="/login">Login</router-link></li>
+                    <li><router-link class="active" tag="a" :to="{ name: 'Signup' }">Signup</router-link></li>
+                    <li><router-link class="active" tag="a" :to="{ name: 'Login' }">Login</router-link></li>
+                    <li><a @click="logout">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -17,12 +18,23 @@
 </style>
 
 <script>
+    import firebase from 'firebase';
     export default {
         name: 'Navbar',
         data() {
             return {
 
             };
+        },
+        methods: {
+            logout() {
+                firebase.auth().signOut()
+                .then(() => {
+                    this.$router.push({
+                        name: 'Signup'
+                    });
+                });
+            }
         }
     }
 </script>
