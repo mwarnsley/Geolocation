@@ -15,8 +15,51 @@
                 <button class="btn deep-purple">Login</button>
             </div>
         </form>
+        <Spinner v-if="loading"/>
     </div>
 </template>
+
+<script>
+    import Spinner from '@/components/shared/Spinner';
+    import firebase from 'firebase';
+
+    export default {
+        name: 'Login',
+        components: {
+            Spinner
+        },
+        data() {
+            return {
+                email: null,
+                password: null,
+                feedback: null,
+                loading: false
+            }
+        },
+        methods: {
+            login() {
+                if (this.email && this.password) {
+                    this.loading = true;
+                    firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+                    .then(cred => {
+                        this.loading = false;
+                        this.$router.push({
+                            name: 'GMap'
+                        });
+                    })
+                    .catch(err => {
+                        this.loading = false;
+                        this.feedback = err.message;
+                    });
+                    this.feedback = null;
+                } else {
+                    this.loading = false;
+                    this.feedback = 'Please fill in both fields';
+                }
+            }
+        }
+    }
+</script>
 
 <style>
     .login {
@@ -30,21 +73,3 @@
         margin-bottom: 16px;
     }
 </style>
-
-<script>
-    export default {
-        name: 'Login',
-        data() {
-            return {
-                email: null,
-                password: null,
-                feedback: null
-            }
-        },
-        methods: {
-            login() {
-                console.log(this.email, this.password);
-            }
-        }
-    }
-</script>

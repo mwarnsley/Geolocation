@@ -23,19 +23,6 @@
     </div>
 </template>
 
-<style>
-    .signup {
-        margin-top: 60px;
-        max-width: 400px;
-    }
-    .signup h2 {
-        font-size: 2.4em;
-    }
-    .signup .field {
-        margin-bottom: 16px;
-    }
-</style>
-
 <script>
     import Spinner from '@/components/shared/Spinner';
     import slugify from 'slugify';
@@ -102,3 +89,16 @@
         }
     }
 </script>
+
+<style>
+    .signup {
+        margin-top: 60px;
+        max-width: 400px;
+    }
+    .signup h2 {
+        font-size: 2.4em;
+    }
+    .signup .field {
+        margin-bottom: 16px;
+    }
+</style>

@@ -2,7 +2,7 @@
     <nav class="nav-extended">
         <div class="nav-wrapper deep-purple darken-1">
             <div class="container">
-                <router-link class="brand-logo left" tag="a" to="/">Geolocation</router-link>
+                <router-link class="brand-logo left" tag="a" :to="{ name: 'GMap' }">Geolocation</router-link>
                 <ul class="right">
                     <li><router-link class="active" tag="a" :to="{ name: 'Signup' }">Signup</router-link></li>
                     <li><router-link class="active" tag="a" :to="{ name: 'Login' }">Login</router-link></li>
@@ -12,10 +12,6 @@
         </div>
     </nav>
 </template>
-
-<style>
-
-</style>
 
 <script>
     import firebase from 'firebase';
@@ -31,7 +27,7 @@
                 firebase.auth().signOut()
                 .then(() => {
                     this.$router.push({
-                        name: 'Signup'
+                        name: 'Login'
                     });
                 });
             }

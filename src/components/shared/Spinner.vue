@@ -3,6 +3,17 @@
         <socket></socket>
     </div>
 </template>
+ 
+<script>
+  import { Socket } from 'vue-loading-spinner';
+
+  export default {
+    name: 'Spinner',
+    components: {
+          Socket
+    }
+  }
+</script>
 
 <style>
     .spinner-overlay {
@@ -23,14 +34,3 @@
         top: 48%;
     }
 </style>
-
- 
-<script>
-  import { Socket } from 'vue-loading-spinner';
-
-  export default {
-    components: {
-      Socket
-    }
-  }
-</script>
