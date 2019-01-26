@@ -17,5 +17,7 @@
 </script>
 
 <style>
-
+  body {
+    background-color: #ddd;
+  }
 </style>

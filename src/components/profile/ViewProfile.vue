@@ -89,3 +89,19 @@
         }
     }
 </script>
+
+<style>
+    .view-profile .card {
+        margin-top: 60px;
+        padding: 20px;
+    }
+    .view-profile h2 {
+        font-size: 2em;
+        margin-top: 0;
+    }
+    .view-profile li {
+        border-bottom: 1px solid #eee;
+        padding: 10px;
+    }
+</style>
+
