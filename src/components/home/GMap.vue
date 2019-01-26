@@ -67,7 +67,7 @@
                     this.renderMap();
                 }, {
                     maximumAge: 60000,
-                    timeout: 5000
+                    timeout: 3000
                 });
             } else {
                 // Position the center by the default values
